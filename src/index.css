@@ -1,13 +1,78 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+    font-size: 22px;
+    --dark-accent: #5ba576;
+    --dark-bg: #3c3231;
+    --dark-text: #e6e0d7;
+    --light-accent: #5ba576;
+    --light-bg: #e6e0d7;
+    --light-text: #3c3231;
+    --font: "Nunito", sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: var(--dark-bg);
+    }
+
+    body,
+    a {
+        color: var(--dark-text);
+    }
+
+    a:hover {
+        color: var(--light-accent);
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: var(--light-bg);
+    }
+
+    body,
+    a {
+        color: var(--light-text);
+    }
+
+    a:hover {
+        color: var(--light-accent);
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    :root {
+        font-size: 18px;
+    }
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+a {
+    text-decoration: none;
+    transition: all 0.05s ease-in-out;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 400;
+    line-height: 100%;
+    margin: 1rem 0;
+}
+
+button,
+input[type="submit"],
+input[type="reset"] {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
 }

@@ -4,6 +4,7 @@ import "./App.css";
 import styled, { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./GlobalStyle";
 import { lightTheme, darkTheme } from "./Themes";
+import { TypeAnimation } from "react-type-animation";
 
 const Container = styled.div`
     display: flex;
@@ -26,7 +27,7 @@ const NavBar = styled.div`
     grid-gap: 0.5rem;
     justify-content: end;
 
-	transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 
     @media only screen and (max-width: 768px) {
         background-color: ${({ theme }) => theme.background};
@@ -52,7 +53,19 @@ const Section = styled.section`
 
     .name {
         font-weight: 700;
+        transition: all 0.2s ease-in-out;
+
         color: ${({ theme }) => theme.accent};
+    }
+
+    .name::after {
+        content: "";
+        display: inline-block;
+        border-radius: 1rem;
+        height: 100%;
+        width: 0.3rem;
+        margin-left: 0.5rem;
+        background-color: ${({ theme }) => theme.accent};
     }
 `;
 
@@ -65,11 +78,6 @@ const LinkContainer = styled.div`
 
 const IconLink = styled.a`
     font-size: 1.5rem;
-    transition: all 0.05s ease-in-out;
-
-    :hover {
-        color: ${({ theme }) => theme.accent};
-    }
 `;
 
 const ScrollToTop = styled.a`
@@ -118,7 +126,14 @@ function App() {
             <Container>
                 <Section id="main">
                     <h1>
-                        hi! i'm <span className="name">patricia</span>
+                        hi! i'm{" "}
+                        <TypeAnimation
+                            sequence={["patricia"]}
+                            wrapper="span"
+                            cursor={true}
+                            repeat={Infinity}
+                            className="name"
+                        />
                     </h1>
                     I am a new graduate with a bachelor's in software
                     engineering from the University of Alberta

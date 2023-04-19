@@ -8,6 +8,7 @@ export const GlobalStyle = createGlobalStyle`
 
     body, a {
         color: ${({ theme }) => theme.text};
-        font-family: "Nunito", sans-serif;
+        font-family: var(--font);
+        font-weight: 300;
     }
 `;
