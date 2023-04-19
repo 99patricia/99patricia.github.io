@@ -25,6 +25,19 @@ const NavBar = styled.div`
     grid-auto-flow: column;
     grid-gap: 0.5rem;
     justify-content: end;
+
+	transition: all 0.2s ease-in-out;
+
+    @media only screen and (max-width: 768px) {
+        background-color: ${({ theme }) => theme.background};
+        justify-content: center;
+        padding: 1rem;
+    }
+
+    i {
+        display: block;
+        margin-top: -5px;
+    }
 `;
 
 const Section = styled.section`
@@ -71,7 +84,6 @@ const ScrollToTop = styled.a`
 
 function App() {
     const [darkMode, setDarkMode] = useState(true);
-
     const [showScrollToTop, setShowScrollToTop] = useState(false);
 
     useEffect(() => {
@@ -93,8 +105,8 @@ function App() {
             <GlobalStyle />
             <NavBar>
                 <a href="#about">about me</a>
-                <a href="#about">skills</a>
-                <a href="#about">projects</a>
+                <a href="#skills">skills</a>
+                <a href="#projects">projects</a>
                 <button onClick={() => setDarkMode(!darkMode)}>
                     <i
                         className={`bi bi-brightness-high${
@@ -123,6 +135,32 @@ function App() {
                     </LinkContainer>
                 </Section>
                 <Section id="about">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Vivamus vehicula magna commodo arcu pulvinar ultricies.
+                    Curabitur in lectus viverra, finibus purus eu, fringilla
+                    nibh. Nam vulputate, arcu vitae venenatis mollis, neque enim
+                    pellentesque neque, vel sagittis risus nisi ut dui.
+                    Suspendisse vestibulum leo semper, consectetur odio non,
+                    finibus tortor. Morbi tincidunt, elit vitae molestie
+                    aliquet, nisl tellus aliquet enim, id maximus augue justo id
+                    lorem. Pellentesque eu sollicitudin urna. Etiam ut tortor id
+                    orci accumsan consequat ultricies sed velit. Curabitur ante
+                    sem, tempus vitae rhoncus et, fringilla sit amet urna.
+                </Section>
+                <Section id="skills">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Vivamus vehicula magna commodo arcu pulvinar ultricies.
+                    Curabitur in lectus viverra, finibus purus eu, fringilla
+                    nibh. Nam vulputate, arcu vitae venenatis mollis, neque enim
+                    pellentesque neque, vel sagittis risus nisi ut dui.
+                    Suspendisse vestibulum leo semper, consectetur odio non,
+                    finibus tortor. Morbi tincidunt, elit vitae molestie
+                    aliquet, nisl tellus aliquet enim, id maximus augue justo id
+                    lorem. Pellentesque eu sollicitudin urna. Etiam ut tortor id
+                    orci accumsan consequat ultricies sed velit. Curabitur ante
+                    sem, tempus vitae rhoncus et, fringilla sit amet urna.
+                </Section>
+                <Section id="projects">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Vivamus vehicula magna commodo arcu pulvinar ultricies.
                     Curabitur in lectus viverra, finibus purus eu, fringilla
