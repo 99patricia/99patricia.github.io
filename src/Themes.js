@@ -1,9 +1,11 @@
-export const lightTheme = {
-    text: "#2e2e2e",
-    background: "#d6d6d6",
+export const darkTheme = {
+    accent: "var(--dark-accent)",
+    background: "var(--dark-bg)",
+    text: "var(--dark-text)",
 };
 
-export const darkTheme = {
-    text: "#d6d6d6",
-    background: "#2e2e2e",
+export const lightTheme = {
+    accent: "var(--light-accent)",
+    background: "var(--light-bg)",
+    text: "var(--light-text)",
 };

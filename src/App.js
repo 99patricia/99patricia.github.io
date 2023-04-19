@@ -33,14 +33,13 @@ const Section = styled.section`
     flex-direction: column;
     justify-content: center;
 
-    h3 {
-        font-size: 5rem;
-        font-weight: 300;
-        margin: 2rem 0;
+    h1 {
+        font-size: 4rem;
     }
 
     .name {
-        color: #b05279;
+        font-weight: 700;
+        color: ${({ theme }) => theme.accent};
     }
 `;
 
@@ -53,10 +52,15 @@ const LinkContainer = styled.div`
 
 const IconLink = styled.a`
     font-size: 1.5rem;
+    transition: all 0.05s ease-in-out;
+
+    :hover {
+        color: ${({ theme }) => theme.accent};
+    }
 `;
 
 const ScrollToTop = styled.a`
-    font-size: 3rem;
+    font-size: 2rem;
     position: fixed;
     bottom: 1rem;
     right: 1rem;
@@ -66,9 +70,7 @@ const ScrollToTop = styled.a`
 `;
 
 function App() {
-    const [darkMode, setDarkMode] = useState(
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-    );
+    const [darkMode, setDarkMode] = useState(true);
 
     const [showScrollToTop, setShowScrollToTop] = useState(false);
 
@@ -103,13 +105,11 @@ function App() {
             </NavBar>
             <Container>
                 <Section id="main">
-                    <h3>
-                        hi! i'm <span className="name">patricia</span>.
-                    </h3>
-                    <p>
-                        I am a new graduate with a bachelor's in software
-                        engineering from the University of Alberta.
-                    </p>
+                    <h1>
+                        hi! i'm <span className="name">patricia</span>
+                    </h1>
+                    I am a new graduate with a bachelor's in software
+                    engineering from the University of Alberta
                     <LinkContainer>
                         <IconLink href="https://github.com/99patricia/">
                             <i className="bi bi-github"></i>
