@@ -54,7 +54,7 @@ const Section = styled.section`
     .name {
         font-weight: 700;
         transition: all 0.2s ease-in-out;
-
+        z-index: 0;
         color: ${({ theme }) => theme.accent};
     }
 
@@ -91,7 +91,9 @@ const ScrollToTop = styled.a`
 `;
 
 function App() {
-    const [darkMode, setDarkMode] = useState(true);
+    const [darkMode, setDarkMode] = useState(
+        window.matchMedia("prefers-color-scheme: dark").matches
+    );
     const [showScrollToTop, setShowScrollToTop] = useState(false);
 
     useEffect(() => {
@@ -131,7 +133,7 @@ function App() {
                             sequence={["patricia"]}
                             wrapper="span"
                             cursor={true}
-                            repeat={Infinity}
+                            repeat={1}
                             className="name"
                         />
                     </h1>
