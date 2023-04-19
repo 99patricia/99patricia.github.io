@@ -47,8 +47,31 @@ const Section = styled.section`
     flex-direction: column;
     justify-content: center;
 
+    .grid {
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-columns: max-content;
+        grid-gap: 0.5rem;
+        align-items: center;
+    }
+
     h1 {
         font-size: 4rem;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: ${({ theme }) => theme.accent};
+    }
+
+    .line {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 6px;
+        border-radius: 1rem;
+        background-color: ${({ theme }) => theme.accent};
     }
 
     .name {
@@ -62,7 +85,7 @@ const Section = styled.section`
         content: "";
         display: inline-block;
         border-radius: 1rem;
-        height: 100%;
+        height: 3.8rem;
         width: 0.3rem;
         margin-left: 0.5rem;
         background-color: ${({ theme }) => theme.accent};
@@ -152,6 +175,10 @@ function App() {
                     </LinkContainer>
                 </Section>
                 <Section id="about">
+                    <div className="grid">
+                        <h2>about me</h2>
+                        <span className="line" />
+                    </div>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Vivamus vehicula magna commodo arcu pulvinar ultricies.
                     Curabitur in lectus viverra, finibus purus eu, fringilla
@@ -165,6 +192,10 @@ function App() {
                     sem, tempus vitae rhoncus et, fringilla sit amet urna.
                 </Section>
                 <Section id="skills">
+                    <div className="grid">
+                        <h2>my skills</h2>
+                        <span className="line" />
+                    </div>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Vivamus vehicula magna commodo arcu pulvinar ultricies.
                     Curabitur in lectus viverra, finibus purus eu, fringilla
@@ -178,6 +209,10 @@ function App() {
                     sem, tempus vitae rhoncus et, fringilla sit amet urna.
                 </Section>
                 <Section id="projects">
+                    <div className="grid">
+                        <h2>my projects</h2>
+                        <span className="line" />
+                    </div>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Vivamus vehicula magna commodo arcu pulvinar ultricies.
                     Curabitur in lectus viverra, finibus purus eu, fringilla
