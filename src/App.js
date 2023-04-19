@@ -1,15 +1,35 @@
+import { useEffect, useState } from "react";
 import "./App.css";
 import styled, { ThemeProvider } from "styled-components";
 
 const Container = styled.div`
-    height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0;
+    margin: 0 10%;
 `;
 
-const Main = styled.div`
+const NavBar = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
+
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 0.5rem;
+    justify-content: end;
+`;
+
+const Section = styled.section`
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
     h3 {
         font-size: 5rem;
         font-weight: 300;
@@ -36,15 +56,61 @@ const theme = {
     main: "dark",
 };
 
+const ScrollToTop = styled.a`
+    font-size: 3rem;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    transition: all 0.2s ease-in-out;
+
+    opacity: ${(props) => (props.showScrollToTop ? "1" : "0")};
+`;
+
 function App() {
+    const [darkMode, setDarkMode] = useState(
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+    );
+    const [showScrollToTop, setShowScrollToTop] = useState(false);
+
+    useEffect(() => {
+        const handleScrollToTopVisibility = () => {
+            window.pageYOffset > 300
+                ? setShowScrollToTop(true)
+                : setShowScrollToTop(false);
+        };
+
+        window.addEventListener("scroll", handleScrollToTopVisibility);
+
+        return () => {
+            window.removeEventListener("scroll", () => {});
+        };
+    }, []);
+
     return (
         <ThemeProvider theme={theme}>
+            <NavBar>
+                <a href="#about">about me</a>
+                <a href="#about">skills</a>
+                <a href="#about">projects</a>
+                {darkMode ? (
+                    <button onClick={() => setDarkMode(!darkMode)}>
+                        <i className="bi bi-brightness-high-fill"></i>
+                    </button>
+                ) : (
+                    <button onClick={() => setDarkMode(!darkMode)}>
+                        <i className="bi bi-brightness-high"></i>
+                    </button>
+                )}
+            </NavBar>
             <Container>
-                <Main>
+                <Section id="main">
                     <h3>
                         hi! i'm <span className="name">patricia</span>.
                     </h3>
-					<p>I've recently completed my bachelor's in software engineering at the University of Alberta.</p>
+                    <p>
+                        I've recently completed my bachelor's in software
+                        engineering at the University of Alberta.
+                    </p>
                     <LinkContainer>
                         <IconLink href="https://github.com/99patricia/">
                             <i className="bi bi-github"></i>
@@ -56,7 +122,23 @@ function App() {
                             <i className="bi bi-envelope-fill"></i>
                         </IconLink>
                     </LinkContainer>
-                </Main>
+                </Section>
+                <Section id="about">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Vivamus vehicula magna commodo arcu pulvinar ultricies.
+                    Curabitur in lectus viverra, finibus purus eu, fringilla
+                    nibh. Nam vulputate, arcu vitae venenatis mollis, neque enim
+                    pellentesque neque, vel sagittis risus nisi ut dui.
+                    Suspendisse vestibulum leo semper, consectetur odio non,
+                    finibus tortor. Morbi tincidunt, elit vitae molestie
+                    aliquet, nisl tellus aliquet enim, id maximus augue justo id
+                    lorem. Pellentesque eu sollicitudin urna. Etiam ut tortor id
+                    orci accumsan consequat ultricies sed velit. Curabitur ante
+                    sem, tempus vitae rhoncus et, fringilla sit amet urna.
+                </Section>
+                <ScrollToTop showScrollToTop={showScrollToTop} href="#main">
+                    <i className="bi bi-arrow-up-circle-fill"></i>
+                </ScrollToTop>
             </Container>
         </ThemeProvider>
     );
