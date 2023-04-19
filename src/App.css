@@ -1,22 +1,9 @@
 :root {
-    --primary: #1f2041;
-    --secondary: #4b3f72;
-    --text: #a4a5b2;
     font-size: 16px;
 }
 
 html {
     scroll-behavior: smooth;
-}
-
-body {
-    background-color: var(--primary);
-}
-
-body,
-a {
-    font-family: "Nunito", sans-serif;
-    color: var(--text);
 }
 
 button,

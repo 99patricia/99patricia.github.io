@@ -1,6 +1,9 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
+
 import styled, { ThemeProvider } from "styled-components";
+import { GlobalStyle } from "./GlobalStyle";
+import { lightTheme, darkTheme } from "./Themes";
 
 const Container = styled.div`
     display: flex;
@@ -37,7 +40,7 @@ const Section = styled.section`
     }
 
     .name {
-        color: var(--secondary);
+        color: #b05279;
     }
 `;
 
@@ -51,10 +54,6 @@ const LinkContainer = styled.div`
 const IconLink = styled.a`
     font-size: 1.5rem;
 `;
-
-const theme = {
-    main: "dark",
-};
 
 const ScrollToTop = styled.a`
     font-size: 3rem;
@@ -70,6 +69,7 @@ function App() {
     const [darkMode, setDarkMode] = useState(
         window.matchMedia("(prefers-color-scheme: dark)").matches
     );
+
     const [showScrollToTop, setShowScrollToTop] = useState(false);
 
     useEffect(() => {
@@ -87,20 +87,19 @@ function App() {
     }, []);
 
     return (
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+            <GlobalStyle />
             <NavBar>
                 <a href="#about">about me</a>
                 <a href="#about">skills</a>
                 <a href="#about">projects</a>
-                {darkMode ? (
-                    <button onClick={() => setDarkMode(!darkMode)}>
-                        <i className="bi bi-brightness-high-fill"></i>
-                    </button>
-                ) : (
-                    <button onClick={() => setDarkMode(!darkMode)}>
-                        <i className="bi bi-brightness-high"></i>
-                    </button>
-                )}
+                <button onClick={() => setDarkMode(!darkMode)}>
+                    <i
+                        className={`bi bi-brightness-high${
+                            darkMode ? "-fill" : ""
+                        }`}
+                    />
+                </button>
             </NavBar>
             <Container>
                 <Section id="main">
@@ -108,8 +107,8 @@ function App() {
                         hi! i'm <span className="name">patricia</span>.
                     </h3>
                     <p>
-                        I've recently completed my bachelor's in software
-                        engineering at the University of Alberta.
+                        I am a new graduate with a bachelor's in software
+                        engineering from the University of Alberta.
                     </p>
                     <LinkContainer>
                         <IconLink href="https://github.com/99patricia/">
