@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 
+import { TypeAnimation } from "react-type-animation";
 import styled, { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./GlobalStyle";
 import { lightTheme, darkTheme } from "./Themes";
-import { TypeAnimation } from "react-type-animation";
 
 const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0 10%;
+    width: 100%;
+    height: 100vh;
 `;
 
 const NavBar = styled.div`
@@ -33,6 +34,7 @@ const NavBar = styled.div`
         background-color: ${({ theme }) => theme.background};
         justify-content: center;
         padding: 1rem;
+        font-size: 1.5rem;
     }
 
     i {
@@ -41,8 +43,17 @@ const NavBar = styled.div`
     }
 `;
 
-const Section = styled.section`
-    height: 100vh;
+const StyledSectionContainer = styled.div`
+    width: 100%;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr 10fr 1fr;
+    align-items: center;
+    justify-items: center;
+`;
+
+const Section = styled.div`
+    margin: 0 10%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -56,7 +67,7 @@ const Section = styled.section`
     }
 
     h1 {
-        font-size: 4rem;
+        font-size: 3rem;
     }
 
     h2 {
@@ -101,45 +112,167 @@ const LinkContainer = styled.div`
 
 const IconLink = styled.a`
     font-size: 1.5rem;
+    cursor: pointer;
 `;
 
-const ScrollToTop = styled.a`
-    font-size: 2rem;
-    position: fixed;
-    bottom: 1rem;
-    right: 1rem;
-    transition: all 0.2s ease-in-out;
-
-    opacity: ${(props) => (props.showScrollToTop ? "1" : "0")};
+const NavLink = styled.a`
+    cursor: pointer;
 `;
+
+const SectionContainer = ({ children, handleChangePage, to, from }) => {
+    return (
+        <StyledSectionContainer>
+            <IconLink onClick={() => handleChangePage(from)}>
+                <i className="bi bi-chevron-left" />
+            </IconLink>
+            {children}
+            <IconLink onClick={() => handleChangePage(to)}>
+                <i className="bi bi-chevron-right" />
+            </IconLink>
+        </StyledSectionContainer>
+    );
+};
+
+const Main = ({ handleChangePage }) => (
+    <SectionContainer
+        handleChangePage={handleChangePage}
+        to="About"
+        from="Projects"
+    >
+        <Section>
+            <h1>
+                hi! i'm{" "}
+                <TypeAnimation
+                    sequence={["patricia"]}
+                    wrapper="span"
+                    cursor={true}
+                    repeat={1}
+                    className="name"
+                />
+            </h1>
+            I am a new graduate with a bachelor's in software engineering from
+            the University of Alberta
+            <LinkContainer>
+                <IconLink href="https://github.com/99patricia/">
+                    <i className="bi bi-github"></i>
+                </IconLink>
+                <IconLink href="https://www.linkedin.com/in/zafrapatricia/">
+                    <i className="bi bi-linkedin"></i>
+                </IconLink>
+                <IconLink href="mailto:pzafra@ualberta.ca">
+                    <i className="bi bi-envelope-fill"></i>
+                </IconLink>
+            </LinkContainer>
+        </Section>
+    </SectionContainer>
+);
+
+const About = ({ handleChangePage }) => (
+    <SectionContainer
+        handleChangePage={handleChangePage}
+        to="Skills"
+        from="Main"
+    >
+        <Section>
+            <div className="grid">
+                <h2>about me</h2>
+                <span className="line" />
+            </div>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+                vehicula magna commodo arcu pulvinar ultricies. Curabitur in
+                lectus viverra, finibus purus eu, fringilla nibh. Nam vulputate,
+                arcu vitae venenatis mollis, neque enim pellentesque neque, vel
+                sagittis risus nisi ut dui. Suspendisse vestibulum leo semper,
+                consectetur odio non, finibus tortor. Morbi tincidunt, elit
+                vitae molestie aliquet, nisl tellus aliquet enim, id maximus
+                augue justo id lorem. Pellentesque eu sollicitudin urna. Etiam
+                ut tortor id orci accumsan consequat ultricies sed velit.
+                Curabitur ante sem, tempus vitae rhoncus et, fringilla sit amet
+                urna.
+            </p>
+        </Section>
+    </SectionContainer>
+);
+
+const Skills = ({ handleChangePage }) => (
+    <SectionContainer
+        handleChangePage={handleChangePage}
+        to="Projects"
+        from="About"
+    >
+        <Section>
+            <div className="grid">
+                <h2>skills</h2>
+                <span className="line" />
+            </div>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+                vehicula magna commodo arcu pulvinar ultricies. Curabitur in
+                lectus viverra, finibus purus eu, fringilla nibh. Nam vulputate,
+                arcu vitae venenatis mollis, neque enim pellentesque neque, vel
+                sagittis risus nisi ut dui. Suspendisse vestibulum leo semper,
+                consectetur odio non, finibus tortor. Morbi tincidunt, elit
+                vitae molestie aliquet, nisl tellus aliquet enim, id maximus
+                augue justo id lorem. Pellentesque eu sollicitudin urna. Etiam
+                ut tortor id orci accumsan consequat ultricies sed velit.
+                Curabitur ante sem, tempus vitae rhoncus et, fringilla sit amet
+                urna.
+            </p>
+        </Section>
+    </SectionContainer>
+);
+const Projects = ({ handleChangePage }) => (
+    <SectionContainer
+        handleChangePage={handleChangePage}
+        to="Main"
+        from="Skills"
+    >
+        <Section>
+            <div className="grid">
+                <h2>projects</h2>
+                <span className="line" />
+            </div>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+                vehicula magna commodo arcu pulvinar ultricies. Curabitur in
+                lectus viverra, finibus purus eu, fringilla nibh. Nam vulputate,
+                arcu vitae venenatis mollis, neque enim pellentesque neque, vel
+                sagittis risus nisi ut dui. Suspendisse vestibulum leo semper,
+                consectetur odio non, finibus tortor. Morbi tincidunt, elit
+                vitae molestie aliquet, nisl tellus aliquet enim, id maximus
+                augue justo id lorem. Pellentesque eu sollicitudin urna. Etiam
+                ut tortor id orci accumsan consequat ultricies sed velit.
+                Curabitur ante sem, tempus vitae rhoncus et, fringilla sit amet
+                urna.
+            </p>
+        </Section>
+    </SectionContainer>
+);
 
 function App() {
     const [darkMode, setDarkMode] = useState(
         window.matchMedia("prefers-color-scheme: dark").matches
     );
-    const [showScrollToTop, setShowScrollToTop] = useState(false);
+    const [showComponent, setShowComponent] = useState("Main");
 
-    useEffect(() => {
-        const handleScrollToTopVisibility = () => {
-            window.pageYOffset > 300
-                ? setShowScrollToTop(true)
-                : setShowScrollToTop(false);
-        };
-
-        window.addEventListener("scroll", handleScrollToTopVisibility);
-
-        return () => {
-            window.removeEventListener("scroll", () => {});
-        };
-    }, []);
+    const handleChangePage = (to) => {
+        setShowComponent(to);
+    };
 
     return (
         <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
             <GlobalStyle />
             <NavBar>
-                <a href="#about">about me</a>
-                <a href="#skills">skills</a>
-                <a href="#projects">projects</a>
+                <NavLink onClick={() => handleChangePage("About")}>
+                    about me
+                </NavLink>
+                <NavLink onClick={() => handleChangePage("Skills")}>
+                    skills
+                </NavLink>
+                <NavLink onClick={() => handleChangePage("Projects")}>
+                    projects
+                </NavLink>
                 <button onClick={() => setDarkMode(!darkMode)}>
                     <i
                         className={`bi bi-brightness-high${
@@ -149,85 +282,18 @@ function App() {
                 </button>
             </NavBar>
             <Container>
-                <Section id="main">
-                    <h1>
-                        hi! i'm{" "}
-                        <TypeAnimation
-                            sequence={["patricia"]}
-                            wrapper="span"
-                            cursor={true}
-                            repeat={1}
-                            className="name"
-                        />
-                    </h1>
-                    I am a new graduate with a bachelor's in software
-                    engineering from the University of Alberta
-                    <LinkContainer>
-                        <IconLink href="https://github.com/99patricia/">
-                            <i className="bi bi-github"></i>
-                        </IconLink>
-                        <IconLink href="https://www.linkedin.com/in/zafrapatricia/">
-                            <i className="bi bi-linkedin"></i>
-                        </IconLink>
-                        <IconLink href="mailto:pzafra@ualberta.ca">
-                            <i className="bi bi-envelope-fill"></i>
-                        </IconLink>
-                    </LinkContainer>
-                </Section>
-                <Section id="about">
-                    <div className="grid">
-                        <h2>about me</h2>
-                        <span className="line" />
-                    </div>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Vivamus vehicula magna commodo arcu pulvinar ultricies.
-                    Curabitur in lectus viverra, finibus purus eu, fringilla
-                    nibh. Nam vulputate, arcu vitae venenatis mollis, neque enim
-                    pellentesque neque, vel sagittis risus nisi ut dui.
-                    Suspendisse vestibulum leo semper, consectetur odio non,
-                    finibus tortor. Morbi tincidunt, elit vitae molestie
-                    aliquet, nisl tellus aliquet enim, id maximus augue justo id
-                    lorem. Pellentesque eu sollicitudin urna. Etiam ut tortor id
-                    orci accumsan consequat ultricies sed velit. Curabitur ante
-                    sem, tempus vitae rhoncus et, fringilla sit amet urna.
-                </Section>
-                <Section id="skills">
-                    <div className="grid">
-                        <h2>my skills</h2>
-                        <span className="line" />
-                    </div>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Vivamus vehicula magna commodo arcu pulvinar ultricies.
-                    Curabitur in lectus viverra, finibus purus eu, fringilla
-                    nibh. Nam vulputate, arcu vitae venenatis mollis, neque enim
-                    pellentesque neque, vel sagittis risus nisi ut dui.
-                    Suspendisse vestibulum leo semper, consectetur odio non,
-                    finibus tortor. Morbi tincidunt, elit vitae molestie
-                    aliquet, nisl tellus aliquet enim, id maximus augue justo id
-                    lorem. Pellentesque eu sollicitudin urna. Etiam ut tortor id
-                    orci accumsan consequat ultricies sed velit. Curabitur ante
-                    sem, tempus vitae rhoncus et, fringilla sit amet urna.
-                </Section>
-                <Section id="projects">
-                    <div className="grid">
-                        <h2>my projects</h2>
-                        <span className="line" />
-                    </div>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Vivamus vehicula magna commodo arcu pulvinar ultricies.
-                    Curabitur in lectus viverra, finibus purus eu, fringilla
-                    nibh. Nam vulputate, arcu vitae venenatis mollis, neque enim
-                    pellentesque neque, vel sagittis risus nisi ut dui.
-                    Suspendisse vestibulum leo semper, consectetur odio non,
-                    finibus tortor. Morbi tincidunt, elit vitae molestie
-                    aliquet, nisl tellus aliquet enim, id maximus augue justo id
-                    lorem. Pellentesque eu sollicitudin urna. Etiam ut tortor id
-                    orci accumsan consequat ultricies sed velit. Curabitur ante
-                    sem, tempus vitae rhoncus et, fringilla sit amet urna.
-                </Section>
-                <ScrollToTop showScrollToTop={showScrollToTop} href="#main">
-                    <i className="bi bi-arrow-up-circle-fill"></i>
-                </ScrollToTop>
+                {showComponent === "Main" && (
+                    <Main handleChangePage={handleChangePage} />
+                )}
+                {showComponent === "About" && (
+                    <About handleChangePage={handleChangePage} />
+                )}
+                {showComponent === "Skills" && (
+                    <Skills handleChangePage={handleChangePage} />
+                )}
+                {showComponent === "Projects" && (
+                    <Projects handleChangePage={handleChangePage} />
+                )}
             </Container>
         </ThemeProvider>
     );
