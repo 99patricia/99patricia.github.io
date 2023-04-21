@@ -5,6 +5,7 @@ import { TypeAnimation } from "react-type-animation";
 import styled, { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./GlobalStyle";
 import { lightTheme, darkTheme } from "./Themes";
+import me from "./me.JPEG";
 
 const Container = styled.div`
     display: grid;
@@ -98,6 +99,32 @@ const Section = styled.div`
         margin-left: 0.5rem;
         background-color: ${({ theme }) => theme.accent};
     }
+
+    .about {
+        @media only screen and (max-width: 768px) {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @media only screen and (min-width: 768px) {
+            display: grid;
+            grid-auto-flow: column;
+            grid-gap: 2rem;
+            align-items: center;
+        }
+    }
+
+    strong {
+        color: ${({ theme }) => theme.accent};
+    }
+
+    img {
+        width: 256px;
+        border-radius: 50%;
+        padding: 0;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    }
 `;
 
 const LinkContainer = styled.div`
@@ -175,19 +202,26 @@ const About = ({ handleChangePage }) => (
                 <h2>about me</h2>
                 <span className="line" />
             </div>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                vehicula magna commodo arcu pulvinar ultricies. Curabitur in
-                lectus viverra, finibus purus eu, fringilla nibh. Nam vulputate,
-                arcu vitae venenatis mollis, neque enim pellentesque neque, vel
-                sagittis risus nisi ut dui. Suspendisse vestibulum leo semper,
-                consectetur odio non, finibus tortor. Morbi tincidunt, elit
-                vitae molestie aliquet, nisl tellus aliquet enim, id maximus
-                augue justo id lorem. Pellentesque eu sollicitudin urna. Etiam
-                ut tortor id orci accumsan consequat ultricies sed velit.
-                Curabitur ante sem, tempus vitae rhoncus et, fringilla sit amet
-                urna.
-            </p>
+            <div className="about">
+                <p>
+                    Hey there! My name is <strong>Patricia Zafra</strong>.
+                    Growing up, I've always had a strong interest in computers.
+                    I watched and experienced the growth of the Internet and
+                    social media age. This interest in computers eventually led
+                    me to study software engineering at the University of
+                    Alberta, where I studied topics such object-oriented
+                    programming, database management, web-based systems,
+                    software requirements engineering, embedded systems, and
+                    more. I am passionate and most interested in full-stack web
+                    development and human-computer interaction.
+                    <br />
+                    <br />
+                    Outside of programming, I also have various hobbies in the
+                    arts such as drawing, painting, and playing and creating
+                    music.
+                </p>
+                <img alt="Me" src={me} />
+            </div>
         </Section>
     </SectionContainer>
 );
