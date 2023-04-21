@@ -7,34 +7,32 @@ import { GlobalStyle } from "./GlobalStyle";
 import { lightTheme, darkTheme } from "./Themes";
 
 const Container = styled.div`
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-rows: max-content;
     align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100vh;
-`;
-
-const NavBar = styled.div`
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    padding: 2rem;
+    height: 100%;
+`;
+
+const NavBar = styled.div`
+    width: 100%;
+    padding: 1rem 2rem;
     box-sizing: border-box;
 
     display: grid;
-    grid-auto-flow: column;
+    grid-auto-flow: row;
     grid-gap: 0.5rem;
     justify-content: end;
+    justify-items: end;
 
     transition: all 0.2s ease-in-out;
 
     @media only screen and (max-width: 768px) {
         background-color: ${({ theme }) => theme.background};
-        justify-content: center;
-        padding: 1rem;
-        font-size: 1.5rem;
     }
 
     i {
@@ -67,7 +65,7 @@ const Section = styled.div`
     }
 
     h1 {
-        font-size: 3rem;
+        font-size: 3.5rem;
     }
 
     h2 {
@@ -95,8 +93,7 @@ const Section = styled.div`
     .name::after {
         content: "";
         display: inline-block;
-        border-radius: 1rem;
-        height: 3.8rem;
+        height: 3rem;
         width: 0.3rem;
         margin-left: 0.5rem;
         background-color: ${({ theme }) => theme.accent};
@@ -141,7 +138,7 @@ const Main = ({ handleChangePage }) => (
     >
         <Section>
             <h1>
-                hi! i'm{" "}
+                hi, my name is{" "}
                 <TypeAnimation
                     sequence={["patricia"]}
                     wrapper="span"
@@ -263,25 +260,25 @@ function App() {
     return (
         <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
             <GlobalStyle />
-            <NavBar>
-                <NavLink onClick={() => handleChangePage("About")}>
-                    about me
-                </NavLink>
-                <NavLink onClick={() => handleChangePage("Skills")}>
-                    skills
-                </NavLink>
-                <NavLink onClick={() => handleChangePage("Projects")}>
-                    projects
-                </NavLink>
-                <button onClick={() => setDarkMode(!darkMode)}>
-                    <i
-                        className={`bi bi-brightness-high${
-                            darkMode ? "-fill" : ""
-                        }`}
-                    />
-                </button>
-            </NavBar>
             <Container>
+                <NavBar>
+                    <button onClick={() => setDarkMode(!darkMode)}>
+                        <i
+                            className={`bi bi-brightness-high${
+                                darkMode ? "-fill" : ""
+                            }`}
+                        />
+                    </button>
+                    <NavLink onClick={() => handleChangePage("About")}>
+                        /about
+                    </NavLink>
+                    <NavLink onClick={() => handleChangePage("Skills")}>
+                        /skills
+                    </NavLink>
+                    <NavLink onClick={() => handleChangePage("Projects")}>
+                        /projects
+                    </NavLink>
+                </NavBar>
                 {showComponent === "Main" && (
                     <Main handleChangePage={handleChangePage} />
                 )}
